@@ -1,0 +1,88 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import { TIMELINE } from '../../data/profile';
+---
+
+<section class="section" id="timeline">
+  <div class="container">
+    <SectionHeading
+      eyebrow="职业路径"
+      title="从销售到运营，再到营销"
+      lead="不包装成「一路高升」的故事，只记录每一段真实发生了什么。"
+    />
+
+    <ol class="timeline">
+      {
+        TIMELINE.map((t) => (
+          <li class="timeline__item">
+            <div class="timeline__marker" aria-hidden="true" />
+            <p class="timeline__period mono">{t.period}</p>
+            <h3 class="timeline__title">{t.title}</h3>
+            <p class="timeline__body">{t.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--sp-6) var(--sp-5);
+  }
+
+  /* 桌面端横向连线 */
+  @media (min-width: 900px) {
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0.55rem;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        var(--c-accent),
+        var(--c-line) 22%,
+        var(--c-line)
+      );
+    }
+  }
+
+  .timeline__item {
+    position: relative;
+    padding-top: var(--sp-5);
+  }
+
+  .timeline__marker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--c-bg);
+    border: 2px solid var(--c-accent);
+  }
+
+  .timeline__period {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--c-accent);
+  }
+
+  .timeline__title {
+    margin-top: var(--sp-2);
+    font-size: var(--fs-lg);
+  }
+
+  .timeline__body {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-base);
+    line-height: 1.75;
+    color: var(--c-muted);
+  }
+</style>

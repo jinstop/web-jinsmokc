@@ -1,0 +1,94 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NotesList from '../../components/sections/NotesList.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+
+const all = await getCollection('notes', ({ data }) => !data.draft);
+const notes = all.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// 标签云
+const tagCount = new Map<string, number>();
+for (const n of notes) {
+  for (const t of n.data.tags) tagCount.set(t, (tagCount.get(t) ?? 0) + 1);
+}
+const tags = [...tagCount.entries()].sort((a, b) => b[1] - a[1]);
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: 'https://www.jins.mokc.top/' },
+    { '@type': 'ListItem', position: 2, name: '数字营销笔记', item: 'https://www.jins.mokc.top/notes' },
+  ],
+};
+
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: '数字营销笔记',
+  description: '出海营销、独立站运营与 AI 提效的实战记录。',
+  url: 'https://www.jins.mokc.top/notes',
+};
+---
+
+<BaseLayout
+  title="数字营销笔记"
+  description="出海营销、独立站运营、广告投放与 AI 提效的实战记录。知识的沉淀，记录每一次增长背后的思考。"
+  structuredData={[breadcrumb, pageSchema]}
+>
+  <section class="page-head">
+    <div class="container">
+      <SectionHeading
+        eyebrow="数字营销笔记"
+        title="知识的沉淀"
+        lead="记录每一次增长背后的思考，包括踩过的坑。看不懂的、验证不了的，不写。"
+      />
+      <ul class="tags" aria-label="标签">
+        {tags.map(([t, c]) => <li class="tags__item">{t}<sup>{c}</sup></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <NotesList notes={notes} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-block: clamp(3rem, 7vw, var(--sp-8)) 0;
+    background: var(--c-bg-soft);
+    border-bottom: 1px solid var(--c-line-soft);
+  }
+
+  .page-head :global(.sec-head) {
+    margin-bottom: var(--sp-6);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    padding-bottom: var(--sp-6);
+  }
+
+  .tags__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    padding: 0.3rem 0.75rem;
+    font-size: var(--fs-sm);
+    color: var(--c-body);
+    background: var(--c-bg);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-full);
+  }
+
+  .tags__item sup {
+    font-size: 0.7em;
+    color: var(--c-subtle);
+  }
+</style>

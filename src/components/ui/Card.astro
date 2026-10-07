@@ -1,0 +1,134 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  /** 有 href 渲染为可点击卡片，否则为静态 article */
+  href?: string;
+  no: string;
+  tags?: readonly string[];
+  points?: readonly string[];
+}
+
+const { title, description, href, no, tags = [], points = [] } = Astro.props;
+const Tag = href ? 'a' : 'article';
+---
+
+<Tag class="card" href={href}>
+  <span class="card__no mono">{no}</span>
+  <h3 class="card__title">{title}</h3>
+  {description && <p class="card__desc">{description}</p>}
+
+  {
+    points.length > 0 && (
+      <ul class="card__points">
+        {points.map((p) => (
+          <li>{p}</li>
+        ))}
+      </ul>
+    )
+  }
+
+  {
+    tags.length > 0 && (
+      <ul class="card__tags">
+        {tags.map((t) => (
+          <li class="card__tag">{t}</li>
+        ))}
+      </ul>
+    )
+  }
+
+  {href && (
+    <span class="card__more" aria-hidden="true">
+      查看详情 →
+    </span>
+  )}
+</Tag>
+
+<style>
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    padding: var(--sp-5);
+    background: var(--c-bg);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    transition: border-color var(--dur) var(--ease),
+      transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+
+  a.card:hover {
+    border-color: var(--c-ink);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  .card__no {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--c-accent);
+  }
+
+  .card__title {
+    font-size: var(--fs-lg);
+    letter-spacing: -0.02em;
+  }
+
+  .card__desc {
+    font-size: var(--fs-base);
+    color: var(--c-muted);
+    line-height: 1.7;
+  }
+
+  .card__points {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    margin-top: var(--sp-1);
+  }
+
+  .card__points li {
+    position: relative;
+    padding-left: var(--sp-4);
+    font-size: var(--fs-sm);
+    color: var(--c-body);
+  }
+
+  .card__points li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.68em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--c-accent);
+  }
+
+  .card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-top: auto;
+    padding-top: var(--sp-3);
+  }
+
+  .card__tag {
+    padding: 0.25rem 0.625rem;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    color: var(--c-muted);
+    background: var(--c-bg-soft);
+    border: 1px solid var(--c-line-soft);
+    border-radius: var(--radius-full);
+  }
+
+  .card__more {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--c-accent);
+  }
+</style>

@@ -1,0 +1,215 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Stats from '../components/ui/Stats.astro';
+import Skills from '../components/sections/Skills.astro';
+import Timeline from '../components/sections/Timeline.astro';
+import Services from '../components/sections/Services.astro';
+import NotesList from '../components/sections/NotesList.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Button from '../components/ui/Button.astro';
+import { STATS, ABOUT_PARAGRAPHS } from '../data/profile';
+
+const allNotes = await getCollection('notes', ({ data }) => !data.draft);
+const latest = allNotes
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: 'https://www.jins.mokc.top/' },
+  ],
+};
+---
+
+<BaseLayout structuredData={breadcrumb}>
+  <Hero />
+
+  <!-- 数据条 -->
+  <section class="section section--tight">
+    <div class="container">
+      <Stats items={STATS} />
+    </div>
+  </section>
+
+  <!-- 关于 -->
+  <section class="section section--soft" id="about">
+    <div class="container about">
+      <div class="about__text">
+        <SectionHeading eyebrow="关于我" title="我是「黎金树」" />
+        {ABOUT_PARAGRAPHS.map((p) => <p>{p}</p>)}
+        <Button href="/about" variant="secondary">完整履历</Button>
+      </div>
+
+      <aside class="about__card" aria-label="工作原则">
+        <p class="mono about__card-label">工作原则</p>
+        <ul>
+          <li>
+            <strong>数据驱动决策</strong>
+            <span>每一个动作都要能对应到可衡量的指标上</span>
+          </li>
+          <li>
+            <strong>运营形成闭环</strong>
+            <span>投放 → 线索 → 跟进 → 成交 → 复盘</span>
+          </li>
+          <li>
+            <strong>实事求是</strong>
+            <span>不夸大承诺，不做无法验证的判断</span>
+          </li>
+          <li>
+            <strong>实用主义</strong>
+            <span>方案必须能落地，不追求理论完美</span>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <Skills />
+  <Timeline />
+  <Services />
+
+  <!-- 笔记 -->
+  <section class="section section--soft" id="notes">
+    <div class="container">
+      <div class="notes__head">
+        <SectionHeading
+          eyebrow="数字营销笔记"
+          title="知识的沉淀"
+          lead="记录每一次增长背后的思考，包括踩过的坑。"
+        />
+        <Button href="/notes" variant="secondary">全部笔记</Button>
+      </div>
+      <NotesList notes={latest} />
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta">
+    <div class="container cta__inner">
+      <h2 class="cta__title">有具体问题想聊？</h2>
+      <p class="cta__lead">
+        不管是渠道诊断、独立站搭建，还是 AI 提效落地方案，先说清楚你的情况，我再判断能不能帮上。
+      </p>
+      <div class="cta__actions">
+        <Button href="/contact" size="lg">联系我</Button>
+        <Button href="/services" variant="ghost" size="lg">先看服务范围</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* 关于 */
+  .about {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: clamp(2rem, 5vw, var(--sp-8));
+    align-items: start;
+  }
+
+  .about__text :global(.sec-head) {
+    margin-bottom: var(--sp-5);
+  }
+
+  .about__text p {
+    font-size: var(--fs-md);
+    line-height: 1.85;
+    color: var(--c-body);
+  }
+
+  .about__text p + p {
+    margin-top: var(--sp-4);
+  }
+
+  .about__text :global(.btn) {
+    margin-top: var(--sp-6);
+  }
+
+  .about__card {
+    padding: var(--sp-5);
+    background: var(--c-bg);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .about__card-label {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-subtle);
+    margin-bottom: var(--sp-4);
+  }
+
+  .about__card li {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    padding-block: var(--sp-4);
+    border-bottom: 1px solid var(--c-line-soft);
+  }
+
+  .about__card li:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .about__card strong {
+    font-size: var(--fs-base);
+    color: var(--c-ink);
+  }
+
+  .about__card span {
+    font-size: var(--fs-sm);
+    color: var(--c-muted);
+  }
+
+  /* 笔记区头 */
+  .notes__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--sp-5);
+    flex-wrap: wrap;
+  }
+
+  .notes__head :global(.sec-head) {
+    margin-bottom: var(--sp-6);
+  }
+
+  /* CTA */
+  .cta__inner {
+    text-align: center;
+    max-width: 58ch;
+  }
+
+  .cta__title {
+    font-size: var(--fs-3xl);
+  }
+
+  .cta__lead {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-lg);
+    line-height: 1.7;
+    color: var(--c-muted);
+  }
+
+  .cta__actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    margin-top: var(--sp-6);
+  }
+
+  @media (max-width: 900px) {
+    .about {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

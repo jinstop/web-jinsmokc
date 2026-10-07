@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import { NAV } from '../data/site';
+---
+
+<BaseLayout title="页面不存在" description="你访问的页面不存在或已被移动。" noindex>
+  <section class="err">
+    <div class="container err__inner">
+      <p class="err__code mono">404</p>
+      <h1 class="err__title">这个页面不存在</h1>
+      <p class="err__lead">
+        链接可能已经失效，或者地址输入有误。可以从下面这些入口重新找。
+      </p>
+
+      <nav class="err__nav" aria-label="站内导航">
+        <ul>
+          {
+            NAV.map((item) => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="err__actions">
+        <Button href="/">返回首页</Button>
+        <Button href="/contact" variant="secondary">报告失效链接</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .err {
+    display: grid;
+    place-items: center;
+    min-height: 70dvh;
+    padding-block: var(--sp-9);
+    text-align: center;
+  }
+
+  .err__inner {
+    max-width: 52ch;
+  }
+
+  .err__code {
+    font-size: clamp(4rem, 12vw, 7rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--c-line);
+  }
+
+  .err__title {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-2xl);
+  }
+
+  .err__lead {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-lg);
+    line-height: 1.7;
+    color: var(--c-muted);
+  }
+
+  .err__nav {
+    margin-top: var(--sp-6);
+  }
+
+  .err__nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--sp-2);
+  }
+
+  .err__nav a {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    font-size: var(--fs-sm);
+    color: var(--c-body);
+    background: var(--c-bg-soft);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-full);
+    transition: border-color var(--dur) var(--ease);
+  }
+
+  .err__nav a:hover {
+    border-color: var(--c-accent);
+    color: var(--c-accent);
+  }
+
+  .err__actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    margin-top: var(--sp-7);
+  }
+</style>

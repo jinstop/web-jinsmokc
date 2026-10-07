@@ -1,0 +1,108 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  notes: CollectionEntry<'notes'>[];
+}
+
+const { notes } = Astro.props;
+
+const fmt = (d: Date) =>
+  `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
+---
+
+<div class="notes">
+  {
+    notes.map((n) => (
+      <article class="note">
+        <div class="note__meta mono">
+          <time datetime={n.data.date.toISOString()}>{fmt(n.data.date)}</time>
+          {n.data.tags.length > 0 && (
+            <span class="note__tags">
+              {n.data.tags.slice(0, 3).map((t) => (
+                <span class="note__tag">{t}</span>
+              ))}
+            </span>
+          )}
+        </div>
+        <h3 class="note__title">
+          <a href={`/notes/${n.id}`}>{n.data.title}</a>
+        </h3>
+        <p class="note__desc">{n.data.description}</p>
+        <span class="note__more" aria-hidden="true">
+          阅读全文 →
+        </span>
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--sp-4);
+  }
+
+  .note {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    padding: var(--sp-5);
+    background: var(--c-bg);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    transition: border-color var(--dur) var(--ease),
+      transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+
+  .note:hover {
+    border-color: var(--c-ink);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  .note__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    font-size: var(--fs-xs);
+    color: var(--c-subtle);
+  }
+
+  .note__tags {
+    display: flex;
+    gap: var(--sp-2);
+    flex-wrap: wrap;
+  }
+
+  .note__tag {
+    padding: 0.1rem 0.5rem;
+    background: var(--c-accent-soft);
+    color: var(--c-accent);
+    border-radius: var(--radius-full);
+  }
+
+  .note__title {
+    font-size: var(--fs-lg);
+    line-height: 1.4;
+  }
+
+  .note__title a:hover {
+    color: var(--c-accent);
+  }
+
+  .note__desc {
+    font-size: var(--fs-base);
+    line-height: 1.75;
+    color: var(--c-muted);
+  }
+
+  .note__more {
+    margin-top: auto;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--c-accent);
+  }
+</style>

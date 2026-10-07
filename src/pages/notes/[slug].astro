@@ -1,0 +1,179 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const getStaticPaths = (async () => {
+  const notes = await getCollection('notes', ({ data }) => !data.draft);
+  return notes.map((note) => ({
+    params: { slug: note.id },
+    props: { note },
+  }));
+}) satisfies GetStaticPaths;
+
+const { note } = Astro.props;
+const { Content } = await render(note);
+
+const SITE_URL = 'https://www.jins.mokc.top';
+const fmt = (d: Date) =>
+  `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: note.data.title,
+  description: note.data.description,
+  datePublished: note.data.date.toISOString(),
+  dateModified: (note.data.updated ?? note.data.date).toISOString(),
+  author: { '@type': 'Person', name: '黎金树', url: `${SITE_URL}/about` },
+  publisher: { '@type': 'Person', name: '黎金树' },
+  mainEntityOfPage: `${SITE_URL}/notes/${note.id}`,
+  keywords: note.data.tags.join(','),
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE_URL}/` },
+    { '@type': 'ListItem', position: 2, name: '数字营销笔记', item: `${SITE_URL}/notes` },
+    { '@type': 'ListItem', position: 3, name: note.data.title, item: `${SITE_URL}/notes/${note.id}` },
+  ],
+};
+---
+
+<BaseLayout
+  title={note.data.title}
+  description={note.data.description}
+  type="article"
+  publishedTime={note.data.date}
+  updatedTime={note.data.updated}
+  structuredData={[articleSchema, breadcrumb]}
+>
+  <article class="article">
+    <header class="article__head">
+      <div class="container container--narrow">
+        <nav class="article__crumb" aria-label="面包屑">
+          <a href="/">首页</a>
+          <span aria-hidden="true">/</span>
+          <a href="/notes">数字营销笔记</a>
+        </nav>
+
+        <h1 class="article__title">{note.data.title}</h1>
+        <p class="article__desc">{note.data.description}</p>
+
+        <div class="article__meta">
+          <time datetime={note.data.date.toISOString()}>{fmt(note.data.date)}</time>
+          {
+            note.data.tags.length > 0 && (
+              <ul class="article__tags">
+                {note.data.tags.map((t) => (
+                  <li>{t}</li>
+                ))}
+              </ul>
+            )
+          }
+        </div>
+      </div>
+    </header>
+
+    <div class="container container--narrow">
+      <div class="prose">
+        <Content />
+      </div>
+
+      <footer class="article__foot">
+        <a class="article__back" href="/notes">← 返回笔记列表</a>
+        <a class="article__cta" href="/contact">有相关问题？聊聊 →</a>
+      </footer>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article__head {
+    padding-block: var(--sp-6) var(--sp-7);
+    background: var(--c-bg-soft);
+    border-bottom: 1px solid var(--c-line-soft);
+  }
+
+  .article__crumb {
+    display: flex;
+    gap: var(--sp-2);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    color: var(--c-subtle);
+    margin-bottom: var(--sp-4);
+  }
+
+  .article__crumb a:hover {
+    color: var(--c-accent);
+  }
+
+  .article__title {
+    font-size: var(--fs-2xl);
+    line-height: 1.3;
+  }
+
+  .article__desc {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-lg);
+    line-height: 1.7;
+    color: var(--c-muted);
+  }
+
+  .article__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-3) var(--sp-4);
+    margin-top: var(--sp-5);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--c-line);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    color: var(--c-subtle);
+  }
+
+  .article__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+  }
+
+  .article__tags li {
+    padding: 0.15rem 0.6rem;
+    background: var(--c-accent-soft);
+    color: var(--c-accent);
+    border-radius: var(--radius-full);
+  }
+
+  .article :global(.prose) {
+    padding-block: var(--sp-7);
+  }
+
+  .article__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--sp-4);
+    padding-block: var(--sp-6);
+    margin-bottom: var(--sp-8);
+    border-top: 1px solid var(--c-line);
+    font-size: var(--fs-base);
+    font-weight: 600;
+  }
+
+  .article__back {
+    color: var(--c-muted);
+  }
+
+  .article__back:hover {
+    color: var(--c-ink);
+  }
+
+  .article__cta {
+    color: var(--c-accent);
+  }
+</style>

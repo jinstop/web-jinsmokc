@@ -1,0 +1,37 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import Card from '../ui/Card.astro';
+import { SKILLS } from '../../data/profile';
+---
+
+<section class="section section--soft" id="skills">
+  <div class="container">
+    <SectionHeading
+      eyebrow="擅长技能"
+      title="四条主线，一个闭环"
+      lead="社媒、独立站、广告、AI 提效不是四件事。单独做都有效，但串成闭环才有复利。"
+    />
+
+    <div class="skills__grid">
+      {
+        SKILLS.map((s) => (
+          <Card
+            no={s.no}
+            title={s.title}
+            description={s.body}
+            tags={s.tags}
+            points={[...s.points]}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--sp-4);
+  }
+</style>

@@ -1,0 +1,128 @@
+---
+import { NAV, SITE, SOCIAL } from '../../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer" id="brx-footer">
+  <div class="container">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <p class="site-footer__name">黎金树</p>
+        <p class="site-footer__desc">
+          实用主义的出海营销与品牌增长方案。<br />
+          数据驱动决策，运营形成闭环。
+        </p>
+      </div>
+
+      <nav class="site-footer__col" aria-label="页脚导航">
+        <h2 class="site-footer__title">导航</h2>
+        <ul>
+          {
+            NAV.map((item) => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="site-footer__col">
+        <h2 class="site-footer__title">联系</h2>
+        <ul>
+          <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+          {
+            SOCIAL.filter((s) => s.external).map((s) => (
+              <li>
+                <a href={s.href} target="_blank" rel="noopener noreferrer">
+                  {s.label} ↗
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p>© {year} {SITE.name}. 保留所有权利。</p>
+      <p class="mono">Built with Astro · Cloudflare Workers</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: var(--sp-8) var(--sp-5);
+    background: var(--c-bg-dark);
+    color: #a1a1aa;
+    font-size: var(--fs-sm);
+  }
+
+  .site-footer__top {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: var(--sp-7);
+    padding-bottom: var(--sp-7);
+    border-bottom: 1px solid #232328;
+  }
+
+  .site-footer__name {
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--sp-3);
+  }
+
+  .site-footer__desc {
+    line-height: 1.75;
+    max-width: 32ch;
+  }
+
+  .site-footer__title {
+    font-size: var(--fs-xs);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #52525b;
+    margin-bottom: var(--sp-4);
+  }
+
+  .site-footer__col ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+
+  .site-footer__col a {
+    transition: color var(--dur) var(--ease);
+  }
+
+  .site-footer__col a:hover {
+    color: #fff;
+  }
+
+  .site-footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    padding-top: var(--sp-5);
+    color: #52525b;
+  }
+
+  @media (max-width: 720px) {
+    .site-footer__top {
+      grid-template-columns: 1fr;
+      gap: var(--sp-6);
+    }
+    .site-footer__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

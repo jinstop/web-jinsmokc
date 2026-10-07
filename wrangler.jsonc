@@ -1,0 +1,19 @@
+{
+  // Cloudflare Workers 部署配置
+  // 由 Cloudflare Workers Builds 自动构建部署：
+  //   Build Command : npm run build
+  //   Deploy Command: npx wrangler deploy
+  // 凭据请通过环境变量或 Cloudflare Secrets 注入，切勿写入本文件。
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "web-jinsmokc",
+  "main": "./dist/_worker.js/index.js",
+  "compatibility_date": "2026-10-07",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

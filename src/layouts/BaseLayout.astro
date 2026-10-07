@@ -1,0 +1,69 @@
+---
+import '../styles/global.css';
+import Header from '../components/common/Header.astro';
+import Footer from '../components/common/Footer.astro';
+import Seo from '../components/common/Seo.astro';
+import { SITE } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishedTime?: Date;
+  updatedTime?: Date;
+  noindex?: boolean;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { structuredData, ...seoProps } = Astro.props;
+
+// 全站默认结构化数据（Organization + WebSite）
+const siteUrl = SITE.url;
+const defaultData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${siteUrl}/#person`,
+    name: '黎金树',
+    alternateName: 'JINS',
+    url: siteUrl,
+    email: `mailto:${SITE.email}`,
+    jobTitle: '数字营销师',
+    description: SITE.description,
+    knowsAbout: [
+      'B2B 海外获客',
+      '独立站运营',
+      'SEO',
+      '社媒营销',
+      '广告投放',
+      'AI 提效',
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${siteUrl}/#website`,
+    url: siteUrl,
+    name: SITE.title,
+    description: SITE.description,
+    inLanguage: SITE.locale,
+    author: { '@id': `${siteUrl}/#person` },
+  },
+];
+---
+
+<!doctype html>
+<html lang={SITE.lang}>
+  <head>
+    <Seo {...seoProps} structuredData={structuredData ?? defaultData} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

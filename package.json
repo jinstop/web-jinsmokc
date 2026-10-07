@@ -1,0 +1,29 @@
+{
+  "name": "web-jinsmokc",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "黎金树 · 数字营销师 — 实用主义出海营销与品牌增长方案",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "astro": "astro",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^12.6.0",
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^5.14.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.9.2",
+    "wrangler": "^4.42.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

@@ -1,0 +1,24 @@
+# 统一换行符，避免 Cloudflare 构建环境与本地不一致
+* text=auto eol=lf
+
+*.md text eol=lf
+*.astro text eol=lf
+*.ts text eol=lf
+*.mjs text eol=lf
+*.json text eol=lf
+*.jsonc text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+*.svg text eol=lf
+*.txt text eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.woff binary
+*.woff2 binary

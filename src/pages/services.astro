@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Services from '../components/sections/Services.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Button from '../components/ui/Button.astro';
+
+const FAQ = [
+  {
+    q: '你主要做哪些类目？',
+    a: 'B2B 外贸为主，做过建材、工业机械、机械设备等类目。类目不同时流量结构和决策链差异很大，方案必须重新看，不能照搬。',
+  },
+  {
+    q: '最小合作周期是多久？',
+    a: '诊断类 2—4 周；代运营类至少 3 个月。广告和 SEO 都需要积累数据，一个月内下结论不现实。',
+  },
+  {
+    q: '怎么收费？',
+    a: '诊断类按项目固定报价；代运营类按月。广告预算另计，不从服务费里抽成——否则我没有控制你预算的动力。',
+  },
+  {
+    q: '能保证询盘量吗？',
+    a: '不能。没人能保证。但我会把可衡量的过程指标说清楚：覆盖多少关键词、拿到多少有效线索、成本降到什么水平。过程可控，结果不吹。',
+  },
+  {
+    q: '和 AI 有什么关系？',
+    a: 'AI 是我的效率工具，不是服务噱头。具体能落在哪、值不值得做，我会直接说做不到的地方。',
+  },
+];
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: 'https://www.jins.mokc.top/' },
+    { '@type': 'ListItem', position: 2, name: '服务', item: 'https://www.jins.mokc.top/services' },
+  ],
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'B2B 数字营销服务',
+  provider: { '@type': 'Person', name: '黎金树' },
+  areaServed: 'Worldwide',
+  description: 'B2B 海外获客诊断、独立站搭建与 SEO、社媒与广告投放代运营、AI 提效工作流落地。',
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<BaseLayout
+  title="服务"
+  description="B2B 海外获客诊断、独立站搭建与 SEO、社媒与广告投放代运营、AI 提效工作流落地。每项服务写清交付物。"
+  structuredData={[breadcrumb, serviceSchema, faqSchema]}
+>
+  <section class="page-head">
+    <div class="container">
+      <SectionHeading
+        eyebrow="服务"
+        title="能落地的方案，写清交付物"
+        lead="不写「赋能」「闭环」这类空话。每项服务都标明交付什么、多久交付、怎么验收。"
+      />
+    </div>
+  </section>
+
+  <Services />
+
+  <section class="section section--soft" id="faq">
+    <div class="container container--narrow">
+      <SectionHeading eyebrow="常见问题" title="合作前先说清楚" />
+
+      <div class="faq">
+        {
+          FAQ.map((f) => (
+            <details class="faq__item">
+              <summary class="faq__q">
+                {f.q}
+                <span class="faq__icon" aria-hidden="true" />
+              </summary>
+              <p class="faq__a">{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+
+      <div class="faq__cta">
+        <p>还有其他问题？直接问，不要客气。</p>
+        <Button href="/contact">联系我</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-block: clamp(3rem, 7vw, var(--sp-8)) var(--sp-7);
+    background: var(--c-bg-soft);
+    border-bottom: 1px solid var(--c-line-soft);
+  }
+
+  .page-head :global(.sec-head) {
+    margin-bottom: 0;
+  }
+
+  .faq {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    padding-block: var(--sp-5);
+    font-size: var(--fs-lg);
+    font-weight: 650;
+    color: var(--c-ink);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .faq__icon::before,
+  .faq__icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: var(--c-accent);
+    border-radius: var(--radius-full);
+    transition: transform var(--dur) var(--ease);
+  }
+
+  .faq__icon::after {
+    transform: rotate(90deg);
+  }
+
+  .faq__item[open] .faq__icon::after {
+    transform: rotate(0deg);
+  }
+
+  .faq__a {
+    padding-bottom: var(--sp-5);
+    font-size: var(--fs-md);
+    line-height: 1.85;
+    color: var(--c-muted);
+    max-width: 68ch;
+  }
+
+  .faq__cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--sp-4);
+    margin-top: var(--sp-7);
+    padding: var(--sp-5);
+    background: var(--c-bg);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+  }
+
+  .faq__cta p {
+    color: var(--c-ink-2);
+    font-weight: 600;
+  }
+</style>

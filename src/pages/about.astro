@@ -1,0 +1,225 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Stats from '../components/ui/Stats.astro';
+import Timeline from '../components/sections/Timeline.astro';
+import Skills from '../components/sections/Skills.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Button from '../components/ui/Button.astro';
+import { STATS, ABOUT_PARAGRAPHS, PRINCIPLES } from '../data/profile';
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: 'https://www.jins.mokc.top/' },
+    { '@type': 'ListItem', position: 2, name: '关于我', item: 'https://www.jins.mokc.top/about' },
+  ],
+};
+
+const profileSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  mainEntity: { '@type': 'Person', name: '黎金树', jobTitle: '数字营销师' },
+};
+---
+
+<BaseLayout
+  title="关于我"
+  description="黎金树，9 年数字营销运营经验，B2B 海外客户开发方向。数据驱动决策，运营形成闭环。"
+  structuredData={[breadcrumb, profileSchema]}
+>
+  <section class="page-head">
+    <div class="container about-hero">
+      <div>
+        <SectionHeading
+          eyebrow="关于我"
+          title="黎金树 · 数字营销师"
+          lead="不包装成「一路高升」的故事，只讲清楚我实际做过什么、擅长什么、能帮到你什么。"
+        />
+        <Button href="/contact" variant="secondary">聊聊合作</Button>
+      </div>
+
+      <aside class="about-hero__card" aria-label="基本信息">
+        <dl>
+          <div><dt>入行时间</dt><dd>2014 年</dd></div>
+          <div><dt>运营经验</dt><dd>9 年</dd></div>
+          <div><dt>主攻方向</dt><dd>B2B 外贸客户开发</dd></div>
+          <div><dt>常驻</dt><dd>中国 · 远程协作</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <Stats items={STATS} />
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container prose-block">
+      <div class="prose-block__text">
+        {ABOUT_PARAGRAPHS.map((p) => <p>{p}</p>)}
+      </div>
+
+      <aside class="about-principles">
+        <p class="mono about-principles__label">工作原则</p>
+        <ul>
+          {
+            PRINCIPLES.map((pr) => (
+              <li>
+                <strong>{pr.title}</strong>
+                <span>{pr.body}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <Timeline />
+  <Skills />
+
+  <section class="section cta">
+    <div class="container cta__inner">
+      <h2 class="cta__title">想聊聊你的渠道问题？</h2>
+      <p class="cta__lead">
+        先说清楚你现在的实际情况，我再判断能不能帮上。帮不上会直接说。
+      </p>
+      <Button href="/contact" size="lg">联系我</Button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-block: clamp(3rem, 7vw, var(--sp-8)) var(--sp-7);
+    background: var(--c-bg-soft);
+    border-bottom: 1px solid var(--c-line-soft);
+  }
+
+  .about-hero {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: clamp(2rem, 5vw, var(--sp-8));
+    align-items: start;
+  }
+
+  .about-hero :global(.sec-head) {
+    margin-bottom: var(--sp-6);
+  }
+
+  .about-hero__card {
+    padding: var(--sp-5);
+    background: var(--c-bg);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+  }
+
+  .about-hero__card dl > div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    padding-block: var(--sp-3);
+    border-bottom: 1px solid var(--c-line-soft);
+  }
+
+  .about-hero__card dl > div:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .about-hero__card dt {
+    font-size: var(--fs-sm);
+    color: var(--c-muted);
+  }
+
+  .about-hero__card dd {
+    font-weight: 650;
+    color: var(--c-ink);
+    text-align: right;
+  }
+
+  .prose-block {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: clamp(2rem, 5vw, var(--sp-8));
+    align-items: start;
+  }
+
+  .prose-block__text p {
+    font-size: var(--fs-md);
+    line-height: 1.9;
+    color: var(--c-body);
+  }
+
+  .prose-block__text p + p {
+    margin-top: var(--sp-4);
+  }
+
+  .about-principles {
+    padding: var(--sp-5);
+    background: var(--c-bg);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+  }
+
+  .about-principles__label {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-subtle);
+    margin-bottom: var(--sp-4);
+  }
+
+  .about-principles li {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    padding-block: var(--sp-4);
+    border-bottom: 1px solid var(--c-line-soft);
+  }
+
+  .about-principles li:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .about-principles strong {
+    color: var(--c-ink);
+    font-size: var(--fs-base);
+  }
+
+  .about-principles span {
+    color: var(--c-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .cta__inner {
+    text-align: center;
+    max-width: 56ch;
+    margin-inline: auto;
+  }
+
+  .cta__title {
+    font-size: var(--fs-2xl);
+  }
+
+  .cta__lead {
+    margin-block: var(--sp-4) var(--sp-6);
+    font-size: var(--fs-lg);
+    line-height: 1.7;
+    color: var(--c-muted);
+  }
+
+  @media (max-width: 900px) {
+    .about-hero,
+    .prose-block {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

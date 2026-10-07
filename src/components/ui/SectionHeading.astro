@@ -1,0 +1,38 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  align?: 'left' | 'center';
+  id?: string;
+  as?: 'h1' | 'h2';
+}
+
+const { eyebrow, title, lead, align = 'left', id, as: As = 'h2' } = Astro.props;
+---
+
+<div class:list={['sec-head', `sec-head--${align}`]} id={id}>
+  {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+  <As class="sec-head__title">{title}</As>
+  {lead && <p class="lead sec-head__lead">{lead}</p>}
+</div>
+
+<style>
+  .sec-head {
+    max-width: 62ch;
+    margin-bottom: clamp(2rem, 4vw, var(--sp-7));
+  }
+
+  .sec-head--center {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .sec-head__title {
+    margin-top: var(--sp-3);
+  }
+
+  .sec-head__lead {
+    margin-top: var(--sp-4);
+  }
+</style>

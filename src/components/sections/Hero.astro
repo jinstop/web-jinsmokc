@@ -1,0 +1,221 @@
+---
+import Button from '../ui/Button.astro';
+import { HERO_HIGHLIGHTS, SITE } from '../../data/site';
+---
+
+<section class="hero" id="brx-content">
+  <div class="container hero__inner">
+    <div class="hero__main">
+      <p class="eyebrow">{SITE.tagline}</p>
+      <h1 class="hero__title">
+        I'm <span class="gradient-text">黎金树</span>
+      </h1>
+      <p class="hero__lead">
+        9 年数字营销运营经验。擅长 B2B 海外客户开发，独立站、社媒营销、出海品牌策划与广告营销，
+        把钱花在有价值的产出上。
+      </p>
+
+      <ul class="hero__list">
+        {
+          HERO_HIGHLIGHTS.map((h) => (
+            <li>
+              <span class="hero__dot" aria-hidden="true" />
+              {h}
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="hero__actions">
+        <Button href="/services" size="lg">查看服务</Button>
+        <Button href="/contact" variant="secondary" size="lg">联系我</Button>
+      </div>
+    </div>
+
+    <aside class="hero__side" aria-label="核心信息">
+      <div class="hero__card">
+        <p class="mono hero__card-label">核心数据</p>
+        <dl class="hero__metrics">
+          <div>
+            <dt>运营经验</dt>
+            <dd>9 年</dd>
+          </div>
+          <div>
+            <dt>独立站月询盘</dt>
+            <dd>80+</dd>
+          </div>
+          <div>
+            <dt>询盘成本优势</dt>
+            <dd>53.8%</dd>
+          </div>
+          <div>
+            <dt>运营渠道</dt>
+            <dd>4 大</dd>
+          </div>
+        </dl>
+        <a class="hero__card-link" href="/about">
+          了解我的工作方式 <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(3.5rem, 9vw, var(--sp-10)) clamp(3rem, 7vw, var(--sp-9));
+  }
+
+  /* 背景网格纹理 */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+        to right,
+        var(--c-line-soft) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, var(--c-line-soft) 1px, transparent 1px);
+    background-size: 4rem 4rem;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      #000 30%,
+      transparent 75%
+    );
+    pointer-events: none;
+  }
+
+  .hero__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: clamp(2rem, 5vw, var(--sp-8));
+    align-items: start;
+  }
+
+  .hero__title {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-4xl);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+  }
+
+  .hero__lead {
+    margin-top: var(--sp-5);
+    max-width: 48ch;
+    font-size: var(--fs-lg);
+    line-height: 1.7;
+    color: var(--c-muted);
+  }
+
+  .hero__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    margin-top: var(--sp-6);
+  }
+
+  .hero__list li {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    font-size: var(--fs-base);
+    color: var(--c-ink-2);
+  }
+
+  .hero__dot {
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--c-accent);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    margin-top: var(--sp-7);
+  }
+
+  /* 侧栏卡片 */
+  .hero__card {
+    padding: var(--sp-5);
+    background: var(--c-bg);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .hero__card-label {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-subtle);
+  }
+
+  .hero__metrics {
+    margin-top: var(--sp-4);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero__metrics > div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    padding-block: var(--sp-3);
+    border-bottom: 1px solid var(--c-line-soft);
+  }
+
+  .hero__metrics > div:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .hero__metrics dt {
+    font-size: var(--fs-sm);
+    color: var(--c-muted);
+  }
+
+  .hero__metrics dd {
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    color: var(--c-ink);
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero__card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    margin-top: var(--sp-5);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--c-line-soft);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--c-accent);
+  }
+
+  .hero__card-link:hover {
+    gap: var(--sp-3);
+  }
+
+  /* 移动端 */
+  @media (max-width: 900px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+    }
+    .hero__side {
+      order: 2;
+    }
+  }
+</style>

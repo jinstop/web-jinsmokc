@@ -1,0 +1,78 @@
+---
+interface Props {
+  items: readonly { value: number; suffix?: string; label: string; hint?: string; decimals?: number }[];
+}
+const { items } = Astro.props;
+---
+
+<dl class="stats">
+  {
+    items.map((s) => (
+      <div class="stats__item">
+        <dt class="visually-hidden">{s.label}</dt>
+        <dd>
+          <span class="stats__value">
+            {s.decimals
+              ? s.value.toFixed(s.decimals)
+              : s.value.toLocaleString('en-US')}
+            {s.suffix && <span class="stats__suffix">{s.suffix}</span>}
+          </span>
+          <span class="stats__label">{s.label}</span>
+          {s.hint && <span class="stats__hint">{s.hint}</span>}
+        </dd>
+      </div>
+    ))
+  }
+</dl>
+
+<style>
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--c-line);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .stats__item {
+    background: var(--c-bg);
+    padding: var(--sp-5) var(--sp-5) var(--sp-5);
+  }
+
+  .stats__item dd {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+  }
+
+  .stats__value {
+    display: flex;
+    align-items: baseline;
+    gap: 0.1em;
+    font-size: var(--fs-2xl);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--c-ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stats__suffix {
+    font-size: 0.5em;
+    font-weight: 600;
+    color: var(--c-accent);
+  }
+
+  .stats__label {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--c-ink-2);
+  }
+
+  .stats__hint {
+    font-size: var(--fs-xs);
+    color: var(--c-subtle);
+  }
+</style>
