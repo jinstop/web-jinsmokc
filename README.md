@@ -25,11 +25,25 @@ npm run preview  # 预览构建结果
 | 语言 | TypeScript（strict） |
 | 样式 | 原生 CSS + 设计 token（`src/styles/global.css`） |
 | 内容 | Astro Content Layer（`src/content/notes`） |
-| 适配器 | `@astrojs/cloudflare` |
-| 部署 | Cloudflare Workers（Static Assets） |
+| 部署 | Cloudflare Workers Static Assets |
 | 依赖管理 | npm（Node ≥ 22） |
 
 **不引入**：数据库、CMS、VPS/Nginx、Bunny CDN、GitHub Actions、前端框架（React/Vue）。
+
+> **关于 `@astrojs/cloudflare`**：本项目是纯静态站（`output: 'static'`，全站预渲染），
+> **不使用** cloudflare adapter。早期版本误加该 adapter 会让构建产出 `_worker.js/` 空壳目录，
+> 导致 `wrangler deploy` 直接报错：
+> `Uploading a Pages _worker.js directory as an asset`。
+> 纯静态托管只需 `wrangler.jsonc` 中的 `assets.directory = "./dist"`，无需 worker 入口。
+
+## 部署故障速查
+
+| 报错 | 根因 | 处理 |
+|---|---|---|
+| `npm error Invalid Version:` | `package-lock.json` 中存在只写 `optional: true`、缺 `version`/`resolved` 的损坏条目（多由本地安装被中断产生） | 删除 `package-lock.json` 与 `node_modules` 后重新 `npm install` 生成 |
+| `Uploading a Pages _worker.js directory as an asset` | 纯静态站误用 cloudflare adapter，产出空壳 worker | 移除 adapter 与 `wrangler.jsonc` 的 `main` 字段 |
+| `The package "@cloudflare/workerd-linux-64" could not be found` | 安装时用了 `--no-optional` | 去掉该 flag，让 optionalDependencies 装上平台二进制 |
+| `Cannot find package '@capsizecss/unpack'` | 同上，optional 包缺失 | 同上 |
 
 ## 目录结构
 

@@ -1,17 +1,16 @@
 {
-  // Cloudflare Workers 部署配置
+  // Cloudflare Workers 部署配置（Static Assets 模式）
   // 由 Cloudflare Workers Builds 自动构建部署：
-  //   Build Command : npm run build
-  //   Deploy Command: npx wrangler deploy
+  //   Build command  : npm run build
+  //   Deploy command : npx wrangler deploy
   // 凭据请通过环境变量或 Cloudflare Secrets 注入，切勿写入本文件。
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "web-jinsmokc",
-  "main": "./dist/_worker.js/index.js",
   "compatibility_date": "2026-10-07",
-  "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "directory": "./dist",
-    "binding": "ASSETS"
+    // 纯静态站，无服务端代码，因此不声明 main / no bundle
+    "not_found_handling": "404-page"
   },
   "observability": {
     "enabled": true
