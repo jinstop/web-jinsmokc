@@ -100,6 +100,7 @@ npm run deploy
 │   ├── styles/global.css       # 设计系统 token
 │   └── content.config.ts       # 内容集合 schema
 ├── _备份/                       # 本地备份（不入 Git）
+├── scripts/release.mjs         # 版本发布脚本（从 修改记录.md 生成 Release）
 ├── 修改记录.md                  # 变更记录（倒序）
 ├── astro.config.mjs
 ├── wrangler.jsonc              # Cloudflare Workers 配置
@@ -150,7 +151,14 @@ Commit 采用 Conventional Commits：`feat:` / `fix:` / `content:` / `seo:` / `d
 
 ## 版本记录
 
-**每次变更必须在 [`修改记录.md`](./修改记录.md) 留档，按时间倒序排列（最新在最上）。**
+版本记录分两处，内容同源，**每次变更必须同步更新**：
+
+| 位置 | 载体 | 用途 |
+|---|---|---|
+| 仓库内 | [`修改记录.md`](./修改记录.md) | 完整记录，按时间**倒序**（最新在最上），随代码一起版本化 |
+| GitHub Releases | [Releases 页](../../releases) | 对外发布说明，按版本归档，便于回溯 |
+
+### 记录格式
 
 每一条记录包含：
 
@@ -168,6 +176,21 @@ Git        分支、commit、push 状态
 ```
 
 版本号规则为 `MAJOR.MINOR.PATCH`，每次修改递增 PATCH 位。
+
+### 发布新版本
+
+```bash
+# 1. 补写 修改记录.md，然后打标签
+git tag -a vX.Y.Z -m "vX.Y.Z — 简述"
+git push origin --tags
+
+# 2. 创建 Release（发布说明自动取自 修改记录.md 对应章节）
+GH_TOKEN=<token> node scripts/release.mjs vX.Y.Z
+```
+
+`scripts/release.mjs` 会从 `修改记录.md` 抽取对应版本章节作为发布说明，
+因此**不需要在两处重复维护内容**。加 `--dry-run` 可先预览。
+令牌只从环境变量读取，不会写入任何文件。
 
 本地备份位于 `_备份/<版本号>/`（已 gitignore，不入库），与记录一一对应，用于回滚。
 
