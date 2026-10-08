@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
 
 export const getStaticPaths = (async () => {
   const notes = await getCollection('notes', ({ data }) => !data.draft);
@@ -14,9 +15,9 @@ export const getStaticPaths = (async () => {
 const { note } = Astro.props;
 const { Content } = await render(note);
 
-const SITE_URL = 'https://www.jins.mokc.top';
+const SITE_URL = SITE.url;
 const fmt = (d: Date) =>
-  `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -25,8 +26,8 @@ const articleSchema = {
   description: note.data.description,
   datePublished: note.data.date.toISOString(),
   dateModified: (note.data.updated ?? note.data.date).toISOString(),
-  author: { '@type': 'Person', name: '黎金树', url: `${SITE_URL}/about` },
-  publisher: { '@type': 'Person', name: '黎金树' },
+  author: { '@type': 'Organization', name: SITE.name, url: `${SITE_URL}/about` },
+  publisher: { '@type': 'Organization', name: SITE.name },
   mainEntityOfPage: `${SITE_URL}/notes/${note.id}`,
   keywords: note.data.tags.join(','),
 };
@@ -35,8 +36,8 @@ const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE_URL}/` },
-    { '@type': 'ListItem', position: 2, name: '数字营销笔记', item: `${SITE_URL}/notes` },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+    { '@type': 'ListItem', position: 2, name: 'Articles', item: `${SITE_URL}/notes` },
     { '@type': 'ListItem', position: 3, name: note.data.title, item: `${SITE_URL}/notes/${note.id}` },
   ],
 };
@@ -53,10 +54,10 @@ const breadcrumb = {
   <article class="article">
     <header class="article__head">
       <div class="container container--narrow">
-        <nav class="article__crumb" aria-label="面包屑">
-          <a href="/">首页</a>
+        <nav class="article__crumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
           <span aria-hidden="true">/</span>
-          <a href="/notes">数字营销笔记</a>
+          <a href="/notes">Articles</a>
         </nav>
 
         <h1 class="article__title">{note.data.title}</h1>
@@ -83,8 +84,8 @@ const breadcrumb = {
       </div>
 
       <footer class="article__foot">
-        <a class="article__back" href="/notes">← 返回笔记列表</a>
-        <a class="article__cta" href="/contact">有相关问题？聊聊 →</a>
+        <a class="article__back" href="/notes">← All articles</a>
+        <a class="article__cta" href="/contact">Questions about your process? Talk to us →</a>
       </footer>
     </div>
   </article>

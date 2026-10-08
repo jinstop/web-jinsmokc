@@ -4,16 +4,17 @@ import Button from '../components/ui/Button.astro';
 import { NAV } from '../data/site';
 ---
 
-<BaseLayout title="页面不存在" description="你访问的页面不存在或已被移动。" noindex>
+<BaseLayout title="Page not found" description="The page you requested does not exist or has moved." noindex>
   <section class="err">
     <div class="container err__inner">
       <p class="err__code mono">404</p>
-      <h1 class="err__title">这个页面不存在</h1>
+      <h1 class="err__title">This page does not exist</h1>
       <p class="err__lead">
-        链接可能已经失效，或者地址输入有误。可以从下面这些入口重新找。
+        The link may be out of date, or the address may be mistyped. Use the links below to get
+        back on track.
       </p>
 
-      <nav class="err__nav" aria-label="站内导航">
+      <nav class="err__nav" aria-label="Site navigation">
         <ul>
           {
             NAV.map((item) => (
@@ -26,8 +27,8 @@ import { NAV } from '../data/site';
       </nav>
 
       <div class="err__actions">
-        <Button href="/">返回首页</Button>
-        <Button href="/contact" variant="secondary">报告失效链接</Button>
+        <Button href="/">Back to home</Button>
+        <Button href="/contact" variant="secondary">Report a broken link</Button>
       </div>
     </div>
   </section>

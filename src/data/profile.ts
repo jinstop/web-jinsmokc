@@ -1,93 +1,98 @@
 /**
- * 个人资料数据
- * 内容与展示逻辑分离：改文案只动这个文件，页面组件不动。
+ * Company data.
+ * Content is separated from presentation: edit copy here, leave components alone.
  */
 
 export const STATS = [
-  { value: 9, suffix: '年', label: '运营经验', hint: '2014 年入行至今' },
-  { value: 80, suffix: '+', label: '月询盘量', hint: '独立站实测峰值' },
-  { value: 53.8, suffix: '%', label: '询盘成本优势', hint: '低于优秀同行', decimals: 1 },
-  { value: 4, suffix: '大渠道', label: '多渠道运营', hint: '平台 / 独立站 / 社媒 / 广告' },
+  { value: 950, suffix: '°C', label: 'Max operating temperature', hint: 'Standard configuration' },
+  { value: '±5', suffix: '°C', label: 'Work zone uniformity', hint: 'Documented on request' },
+  { value: 40, suffix: '+', label: 'Export markets', hint: 'Europe, North America, Southeast Asia' },
+  { value: 25, suffix: ' yrs', label: 'Engineering & manufacturing', hint: 'Continuous furnace lines only' },
 ] as const;
 
 export const ABOUT_PARAGRAPHS = [
-  '我是「黎金树」。2014 年毕业出来干了 3 年电商销售，往后 9 年一直从事电商运营工作。',
-  '多年运营营销工作让我熟悉各渠道流量底层逻辑和灵活的运营思路。擅长方向是 B2B 外贸客户开发：通过 B2B 平台、独立站、Facebook、广告营销多渠道开发客户线索，对不同渠道精细化运营有独特思路。',
-  '「数据驱动决策，运营形成闭环」是我的运营原则。',
-  '我性格上不是外向夸夸其谈的人，做事讲究实事求是。工作中追求效率和实用性，所以最近研究用 AI 给外贸运营工作提效。',
+  'HCS builds continuous heat treatment furnaces for industrial component manufacturers. We work on one product family: furnaces that process parts continuously through a controlled thermal cycle, rather than in batches.',
+  'That focus shapes how we work. A continuous line is a system — heating, atmosphere, conveying, quench and control all interact. A furnace that meets its stated temperature on paper but drifts across the work zone in production is not a usable furnace, so we treat uniformity verification and handover documentation as part of the machine, not as paperwork.',
+  'We supply mesh belt, roller hearth, car bottom and pusher platforms, and we size each line against the customer\'s actual part geometry, throughput target and downstream handling. Sometimes that means recommending a smaller line with a longer dwell, or a two-stage arrangement, instead of the biggest furnace the budget would allow.',
+  'Export is where most of our work sits. That means remote commissioning support, operator training, and spare parts that can be shipped quickly enough to matter.',
 ] as const;
 
 export const TIMELINE = [
   {
+    period: '1998',
+    title: 'Company founded',
+    body: 'Started as a furnace component fabricator, building burners, retorts and frames for batch furnace builders.',
+  },
+  {
+    period: '2004',
+    title: 'First continuous mesh belt line',
+    body: 'Delivered the first in-house designed continuous mesh belt furnace for fastener and small parts hardening.',
+  },
+  {
+    period: '2009',
+    title: 'Roller hearth development',
+    body: 'Roller hearth platform introduced for larger parts and heavier loads where a mesh belt would not carry the weight.',
+  },
+  {
     period: '2014',
-    title: '初入职场',
-    body: '从销售客服做起，一年时间做到团队第一。',
+    title: 'First export installations',
+    body: 'Commissioned lines in Europe and Southeast Asia; remote commissioning workflow established.',
   },
   {
-    period: '2017',
-    title: '转型运营岗',
-    body: '熟悉多平台、多渠道的运营理念与流量逻辑，对后期运营成长有质的提升。',
+    period: '2019',
+    title: 'Full platform range',
+    body: 'Car bottom and pusher types added, completing the four continuous platforms offered today.',
   },
   {
-    period: '2023',
-    title: '深耕 B2B',
-    body: '客户开发切入 B2B 外贸运营，负责客户开发，成长速度快。完成从 0 搭建线上获客渠道。',
-  },
-  {
-    period: '2024—2026',
-    title: '外贸 B2B 效果显著',
-    body: '大型建材类目中询盘转化率五星水平，询盘成本远低于优秀同行 53.8%，询盘转化率高于行业五星。',
-  },
-  {
-    period: '2026 起',
-    title: '做实用主义的数字营销师',
-    body: '引导自己往上走，提升数字营销技能。给自身做减法，专注海外社媒和独立站营销。提供可落地、实用主义的数字营销解决方案，包括品牌建设与营销计划。',
+    period: 'Present',
+    title: '40+ export markets',
+    body: 'Lines in service across Europe, North America, Turkey, India and Southeast Asia.',
   },
 ] as const;
 
 export const SKILLS = [
   {
     no: '01',
-    title: '社媒营销获客',
-    tags: ['Facebook', 'Instagram', 'WhatsApp', 'Meta 广告'],
-    body: '熟悉 Meta 系社媒营销与广告投放获客。曾操作建材、工业机械等类目，有效客户询盘成本优于阿里国际站。',
+    title: 'Continuous Mesh Belt Furnace',
+    tags: ['Mesh belt', 'Fasteners', 'Small parts', 'High throughput'],
+    body: 'Parts carried on a woven mesh belt through the full thermal cycle. Suits small to medium components that need high throughput and can tolerate belt contact.',
     points: [
-      '多平台账号矩阵搭建与内容节奏把控',
-      '广告受众分层与素材迭代测试',
-      '社媒私信 / WhatsApp 询盘承接',
+      'Belt width and pitch matched to part size',
+      'Continuous or batch loading with zone control',
+      'Optional quench section at the belt exit',
     ],
   },
   {
     no: '02',
-    title: '独立站运营',
-    tags: ['WordPress', 'SEO', 'Google Ads', 'GA4'],
-    body: '擅长独立站搭建、SEO 优化与 SMO 营销。曾独立搭建一个全新品牌 B2B 独立站，月询盘量 80+。',
+    title: 'Roller Hearth Furnace',
+    tags: ['Roller hearth', 'Heavy parts', 'Shafts', 'Rings'],
+    body: 'Parts ride on driven rollers through the heated zone. Built for heavier sections and long parts that a mesh belt cannot support.',
     points: [
-      '站群结构与落地页转化设计',
-      '关键词研究 + 内容集群 SEO',
-      'GA4 事件埋点与转化归因',
+      'Heated roller table with independent zone control',
+      'Suitable for shafts, rings, flanges and forgings',
+      'Load and unload tables sized to your handling',
     ],
   },
   {
     no: '03',
-    title: '广告营销推广',
-    tags: ['P4P', 'Google Ads', 'Facebook Ads'],
-    body: '精准广告计划投放，把钱花在有价值的产出上。',
+    title: 'Car Bottom Furnace',
+    tags: ['Car bottom', 'Car shuttle', 'Large parts', 'Variable batches'],
+    body: 'A batch furnace that moves on rail-mounted cars through a continuous tunnel. High chamber flexibility for mixed part families.',
     points: [
-      '账户结构与出价策略',
-      '关键词 / 受众双维度测试',
-      '成本控制与线索质量平衡',
+      'Multiple cars, staggered cycle times',
+      'Sealed atmosphere with controlled purge',
+      'Good fit where part mix changes frequently',
     ],
   },
   {
     no: '04',
-    title: 'AI 提效',
-    tags: ['DeepSeek', 'ChatGPT', 'Gemini', '自动化脚本'],
-    body: '把 AI 模型结合实际业务场景，提高个人和团队效率。',
+    title: 'Pusher Furnace',
+    tags: ['Pusher', 'Long parts', 'Bars', 'Continuous discharge'],
+    body: 'Work is pushed continuously from a charge end through the heated length, with a discharge conveyor at the far end.',
     points: [
-      'Excel / 数据处理自动化',
-      '批量上架与内容生成工具',
-      '可复用工作流 SOP 沉淀',
+      'Simple, rugged mechanism with few moving parts',
+      'Suits long bars and linear parts',
+      'Easy to integrate with upstream and downstream handling',
     ],
   },
 ] as const;
@@ -95,60 +100,60 @@ export const SKILLS = [
 export const SERVICES = [
   {
     no: '01',
-    title: 'B2B 海外获客诊断',
-    summary: '先看清问题，再决定投入。',
-    body: '梳理现有渠道结构、流量数据与询盘链路，定位真正的转化瓶颈，输出一份可执行的优先级清单。',
-    deliverables: ['渠道数据盘点表', '转化漏斗诊断报告', '90 天优先级建议'],
+    title: 'Process Engineering',
+    summary: 'Size the line against your parts, not our catalogue.',
+    body: 'We start from your part geometry, throughput target, atmosphere requirement and downstream handling, then size heating zones, dwell and conveying accordingly. The output is a specification you can send to other suppliers for comparison.',
+    deliverables: ['Process recommendation', 'Zone and temperature layout', 'Throughput and energy estimate'],
   },
   {
     no: '02',
-    title: '独立站搭建与 SEO',
-    summary: '从 0 到能承接询盘的独立站。',
-    body: '站点架构、内容结构、落地页转化路径与 SEO 基础建设，含关键词集群规划与上线后持续优化。',
-    deliverables: ['站点架构方案', '关键词集群规划', '月度内容排期'],
+    title: 'Manufacturing & Inspection',
+    summary: 'Fabrication with documented checks at each stage.',
+    body: 'In-house fabrication of frames, retorts and conveyor assemblies. Inspection points cover refractory lining, element and burner installation, sealing and control wiring, recorded against the agreed specification.',
+    deliverables: ['Fabrication progress reports', 'Inspection and test records', 'Pre-shipment FAT report'],
   },
   {
     no: '03',
-    title: '社媒与广告投放代运营',
-    summary: '社媒 + 广告双轮，精细化投放。',
-    body: 'Meta 系社媒内容运营与广告投放，按渠道特性做差异化策略，聚焦有效询盘而非曝光数据。',
-    deliverables: ['内容日历', '广告账户结构', '周报 + 月度复盘'],
+    title: 'Installation & Commissioning',
+    summary: 'On-site or remote, with operator handover.',
+    body: 'Foundation and erection supervision, burn-in, atmosphere tuning, uniformity survey and operator training. For distant markets we run supervised remote commissioning with video support.',
+    deliverables: ['Installation supervision', 'Temperature uniformity survey', 'Operator training records'],
   },
   {
     no: '04',
-    title: 'AI 提效工作流落地',
-    summary: '让 AI 真正替人干活。',
-    body: '结合团队实际场景，把 AI 嵌入数据处理、内容生成、批量操作等重复工作，落地成可复用的工具与 SOP。',
-    deliverables: ['场景优先级评估', '可运行工具 / 脚本', '团队使用 SOP'],
+    title: 'Aftermarket & Spare Parts',
+    summary: 'Support that continues after handover.',
+    body: 'Wear parts, heating elements, burners, belt and roller stock are held or manufactured to order. Remote troubleshooting first to see whether a visit is needed.',
+    deliverables: ['Spare parts list at handover', 'Remote troubleshooting support', 'Wear part replacement guidance'],
   },
 ] as const;
 
 export const PROCESS = [
   {
     step: '01',
-    title: '需求对齐',
-    body: '明确业务目标、目标市场与当前资源，界定本次合作要解决的核心问题。',
+    title: 'Enquiry & Process Definition',
+    body: 'You send part samples or drawings, throughput target and atmosphere requirement. We confirm what the process actually needs before quoting equipment.',
   },
   {
     step: '02',
-    title: '数据诊断',
-    body: '拉取现有渠道数据，找出流量与转化上的真实瓶颈点，不猜、不套模板。',
+    title: 'Engineering & Quotation',
+    body: 'We issue a technical proposal with zone layout, temperature range, uniformity class and utilities consumption, plus a price and lead time you can compare like for like.',
   },
   {
     step: '03',
-    title: '方案与排期',
-    body: '输出分阶段执行方案，标注动作、负责人与可衡量指标。',
+    title: 'Manufacturing & Pre-Shipment Test',
+    body: 'Fabrication and assembly proceed with recorded inspection points. A pre-shipment test is run so issues surface at our works, not at your plant.',
   },
   {
     step: '04',
-    title: '执行与复盘',
-    body: '按排期推进，用数据验证效果，每月复盘并调整策略。',
+    title: 'Delivery, Commissioning & Training',
+    body: 'Erection, burn-in, atmosphere tuning and uniformity survey, then operator handover. Documentation and spare parts go with the machine.',
   },
 ] as const;
 
 export const PRINCIPLES = [
-  { title: '数据驱动决策', body: '每一个动作都要能对应到可衡量的指标上。' },
-  { title: '运营形成闭环', body: '投放 → 线索 → 跟进 → 成交 → 复盘，不断回灌下一轮动作。' },
-  { title: '实事求是', body: '不夸大承诺，不做无法验证的判断。' },
-  { title: '实用主义', body: '方案必须能落地，不追求理论完美。' },
+  { title: 'Process first, catalogue second', body: 'Equipment is sized against your part and throughput, not against what we would like to sell.' },
+  { title: 'Uniformity you can verify', body: 'Work zone uniformity is surveyed and documented rather than asserted in a brochure.' },
+  { title: 'Delivered as specified', body: 'Test records and documents are issued against the agreed specification at handover.' },
+  { title: 'Support after handover', body: 'Commissioning, training and spare parts continue long after the invoice is closed.' },
 ] as const;

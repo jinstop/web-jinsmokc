@@ -1,19 +1,31 @@
 /**
- * 全站数据集中管理
- * 修改站点信息、导航、社交账号只需改这一个文件。
+ * Site-wide data.
+ * Edit copy here only — page components hold no hardcoded marketing text.
  */
 
+/**
+ * Search engine indexing switch
+ *
+ * `false` = block all crawling (current)
+ * `true`  = restore normal indexing
+ */
+export const INDEXING_ENABLED = false as const;
+
+export const ROBOTS_META = INDEXING_ENABLED
+  ? 'index, follow'
+  : 'noindex, nofollow, noarchive, nosnippet, noimageindex';
+
 export const SITE = {
-  name: '黎金树',
-  title: '黎金树 · 数字营销师',
-  tagline: 'B2B 数字营销',
+  name: 'HCS',
+  title: 'HCS — Continuous Industrial Heat Treatment Furnaces',
+  tagline: 'Continuous Heat Treatment Furnaces',
   description:
-    '9 年数字营销运营经验，擅长独立站、社媒营销、出海品牌策划与广告营销。实用主义的出海营销与品牌增长解决方案。',
-  /** 生产域名，用于 canonical / sitemap */
+    'HCS designs and manufactures continuous heat treatment furnaces — mesh belt, roller hearth, car bottom and pusher types — with documented temperature uniformity, full commissioning support and worldwide delivery.',
+  /** Production domain, used for canonical / sitemap */
   url: 'https://www.jins.mokc.top',
-  locale: 'zh_CN',
-  lang: 'zh-CN',
-  author: '黎金树',
+  locale: 'en_US',
+  lang: 'en',
+  author: 'HCS',
   /** Email */
   email: 'jinstop365@gmail.com',
   /** 备案/统计用，无则留空 */
@@ -21,21 +33,21 @@ export const SITE = {
 } as const;
 
 export const NAV = [
-  { label: '首页', href: '/' },
-  { label: '关于我', href: '/about' },
-  { label: '服务', href: '/services' },
-  { label: '数字营销笔记', href: '/notes' },
-  { label: '联系我', href: '/contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Products', href: '/products' },
+  { label: 'About', href: '/about' },
+  { label: 'Articles', href: '/notes' },
+  { label: 'Contact', href: '/contact' },
 ] as const;
 
 export const SOCIAL = [
-  { label: '个人博客', href: 'https://www.jins.top', external: true },
   { label: 'Email', href: 'mailto:jinstop365@gmail.com', external: false },
 ] as const;
 
-/** 首页数据条 */
+/** Home hero bullet points */
 export const HERO_HIGHLIGHTS = [
-  '9年数字营销运营经验',
-  '擅长独立站、社媒营销、出海品牌策划和广告营销',
-  'AI提效实践者',
+  'Standard operating temperature up to 950 °C',
+  'Work zone uniformity within ±5 °C, documented on request',
+  'Four continuous furnace platforms, one engineering team',
+  'Commissioning, operator training and lifetime spare parts support',
 ] as const;

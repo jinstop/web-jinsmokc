@@ -11,21 +11,26 @@ const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: '首页', item: 'https://www.jins.mokc.top/' },
-    { '@type': 'ListItem', position: 2, name: '关于我', item: 'https://www.jins.mokc.top/about' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jins.mokc.top/' },
+    { '@type': 'ListItem', position: 2, name: 'About', item: 'https://www.jins.mokc.top/about' },
   ],
 };
 
 const profileSchema = {
   '@context': 'https://schema.org',
   '@type': 'ProfilePage',
-  mainEntity: { '@type': 'Person', name: '黎金树', jobTitle: '数字营销师' },
+  mainEntity: {
+    '@type': 'Organization',
+    name: 'HCS',
+    description:
+      'Manufacturer of continuous industrial heat treatment furnaces — mesh belt, roller hearth, car bottom and pusher platforms.',
+  },
 };
 ---
 
 <BaseLayout
-  title="关于我"
-  description="黎金树，9 年数字营销运营经验，B2B 海外客户开发方向。数据驱动决策，运营形成闭环。"
+  title="About"
+  description="HCS designs and manufactures continuous heat treatment furnaces. Four platforms, in-house fabrication, documented temperature uniformity and commissioning support worldwide."
   structuredData={[breadcrumb, profileSchema]}
 >
   <section class="page-head">
@@ -33,19 +38,19 @@ const profileSchema = {
       <div>
         <SectionHeading
           as="h1"
-          eyebrow="关于我"
-          title="黎金树 · 数字营销师"
-          lead="不包装成「一路高升」的故事，只讲清楚我实际做过什么、擅长什么、能帮到你什么。"
+          eyebrow="About HCS"
+          title="Continuous heat treatment furnaces"
+          lead="Twenty-five years building furnaces, and the last two decades of it spent entirely on continuous lines for industrial heat treatment."
         />
-        <Button href="/contact" variant="secondary">聊聊合作</Button>
+        <Button href="/contact" variant="secondary">Send an enquiry</Button>
       </div>
 
-      <aside class="about-hero__card" aria-label="基本信息">
+      <aside class="about-hero__card" aria-label="Company facts">
         <dl>
-          <div><dt>入行时间</dt><dd>2014 年</dd></div>
-          <div><dt>运营经验</dt><dd>9 年</dd></div>
-          <div><dt>主攻方向</dt><dd>B2B 外贸客户开发</dd></div>
-          <div><dt>常驻</dt><dd>中国 · 远程协作</dd></div>
+          <div><dt>Founded</dt><dd>1998</dd></div>
+          <div><dt>Focus</dt><dd>Continuous furnaces only</dd></div>
+          <div><dt>Platforms</dt><dd>4 types</dd></div>
+          <div><dt>Delivery</dt><dd>Worldwide, with on-site support</dd></div>
         </dl>
       </aside>
     </div>
@@ -64,7 +69,7 @@ const profileSchema = {
       </div>
 
       <aside class="about-principles">
-        <p class="mono about-principles__label">工作原则</p>
+        <p class="mono about-principles__label">How we work</p>
         <ul>
           {
             PRINCIPLES.map((pr) => (
@@ -84,11 +89,12 @@ const profileSchema = {
 
   <section class="section cta">
     <div class="container cta__inner">
-      <h2 class="cta__title">想聊聊你的渠道问题？</h2>
+      <h2 class="cta__title">Working on a new heat treatment line?</h2>
       <p class="cta__lead">
-        先说清楚你现在的实际情况，我再判断能不能帮上。帮不上会直接说。
+        Send the part, the throughput target and the atmosphere. We will tell you what the
+        process requires — and if that means a smaller furnace, we will say that too.
       </p>
-      <Button href="/contact" size="lg">联系我</Button>
+      <Button href="/contact" size="lg">Send an enquiry</Button>
     </div>
   </section>
 </BaseLayout>

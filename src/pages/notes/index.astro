@@ -18,34 +18,35 @@ const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: '首页', item: 'https://www.jins.mokc.top/' },
-    { '@type': 'ListItem', position: 2, name: '数字营销笔记', item: 'https://www.jins.mokc.top/notes' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jins.mokc.top/' },
+    { '@type': 'ListItem', position: 2, name: 'Articles', item: 'https://www.jins.mokc.top/notes' },
   ],
 };
 
 const pageSchema = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
-  name: '数字营销笔记',
-  description: '出海营销、独立站运营与 AI 提效的实战记录。',
+  name: 'Technical articles',
+  description:
+    'Practical writing on continuous heat treatment furnaces: furnace selection, atmosphere control, temperature uniformity, quench integration and maintenance.',
   url: 'https://www.jins.mokc.top/notes',
 };
 ---
 
 <BaseLayout
-  title="数字营销笔记"
-  description="出海营销、独立站运营、广告投放与 AI 提效的实战记录。知识的沉淀，记录每一次增长背后的思考。"
+  title="Articles"
+  description="Practical notes on continuous heat treatment furnaces — selection, atmosphere control, temperature uniformity, quench integration and maintenance."
   structuredData={[breadcrumb, pageSchema]}
 >
   <section class="page-head">
     <div class="container">
       <SectionHeading
         as="h1"
-        eyebrow="数字营销笔记"
-        title="知识的沉淀"
-        lead="记录每一次增长背后的思考，包括踩过的坑。看不懂的、验证不了的，不写。"
+        eyebrow="Technical articles"
+        title="Notes from the furnace floor"
+        lead="Written for people who specify, operate or maintain continuous heat treatment equipment. Anything we cannot verify on a real line, we leave out."
       />
-      <ul class="tags" aria-label="标签">
+      <ul class="tags" aria-label="Tags">
         {tags.map(([t, c]) => <li class="tags__item">{t}<sup>{c}</sup></li>)}
       </ul>
     </div>

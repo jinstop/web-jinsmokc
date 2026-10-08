@@ -20,7 +20,7 @@ const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: '首页', item: 'https://www.jins.mokc.top/' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jins.mokc.top/' },
   ],
 };
 ---
@@ -39,29 +39,29 @@ const breadcrumb = {
   <section class="section section--soft" id="about">
     <div class="container about">
       <div class="about__text">
-        <SectionHeading eyebrow="关于我" title="我是「黎金树」" />
+        <SectionHeading eyebrow="About HCS" title="Continuous furnaces, done properly" />
         {ABOUT_PARAGRAPHS.map((p) => <p>{p}</p>)}
-        <Button href="/about" variant="secondary">完整履历</Button>
+        <Button href="/about" variant="secondary">Company profile</Button>
       </div>
 
-      <aside class="about__card" aria-label="工作原则">
-        <p class="mono about__card-label">工作原则</p>
+      <aside class="about__card" aria-label="How we work">
+        <p class="mono about__card-label">How we work</p>
         <ul>
           <li>
-            <strong>数据驱动决策</strong>
-            <span>每一个动作都要能对应到可衡量的指标上</span>
+            <strong>Process first</strong>
+            <span>Sized against your part and throughput</span>
           </li>
           <li>
-            <strong>运营形成闭环</strong>
-            <span>投放 → 线索 → 跟进 → 成交 → 复盘</span>
+            <strong>Uniformity you can verify</strong>
+            <span>Surveyed and documented, not asserted</span>
           </li>
           <li>
-            <strong>实事求是</strong>
-            <span>不夸大承诺，不做无法验证的判断</span>
+            <strong>Delivered as specified</strong>
+            <span>Test records issued at handover</span>
           </li>
           <li>
-            <strong>实用主义</strong>
-            <span>方案必须能落地，不追求理论完美</span>
+            <strong>Support after handover</strong>
+            <span>Commissioning, training and spare parts</span>
           </li>
         </ul>
       </aside>
@@ -77,11 +77,11 @@ const breadcrumb = {
     <div class="container">
       <div class="notes__head">
         <SectionHeading
-          eyebrow="数字营销笔记"
-          title="知识的沉淀"
-          lead="记录每一次增长背后的思考，包括踩过的坑。"
+          eyebrow="Technical articles"
+          title="Notes from the furnace floor"
+          lead="Practical writing on furnace selection, atmosphere control, uniformity and maintenance."
         />
-        <Button href="/notes" variant="secondary">全部笔记</Button>
+        <Button href="/notes" variant="secondary">All articles</Button>
       </div>
       <NotesList notes={latest} />
     </div>
@@ -90,13 +90,15 @@ const breadcrumb = {
   <!-- CTA -->
   <section class="section cta">
     <div class="container cta__inner">
-      <h2 class="cta__title">有具体问题想聊？</h2>
+      <h2 class="cta__title">Have a process that needs heating?</h2>
       <p class="cta__lead">
-        不管是渠道诊断、独立站搭建，还是 AI 提效落地方案，先说清楚你的情况，我再判断能不能帮上。
+        Send us part samples or drawings, your throughput target and the atmosphere you need.
+        We will tell you what the process actually requires — including when a smaller line with
+        a longer dwell is the better answer.
       </p>
       <div class="cta__actions">
-        <Button href="/contact" size="lg">联系我</Button>
-        <Button href="/services" variant="ghost" size="lg">先看服务范围</Button>
+        <Button href="/contact" size="lg">Send an enquiry</Button>
+        <Button href="/products" variant="ghost" size="lg">View furnaces</Button>
       </div>
     </div>
   </section>

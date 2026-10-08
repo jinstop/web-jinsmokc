@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Services from '../components/sections/Services.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Button from '../components/ui/Button.astro';
+
+const FAQ = [
+  {
+    q: 'Which furnace type should I choose?',
+    a: 'It follows the part. Small to medium parts that tolerate belt contact usually run on a mesh belt. Heavier or longer parts need a roller hearth. Mixed part families with frequent changeovers suit a car bottom. Long bars and linear parts suit a pusher. Send drawings and we will tell you which one fits, including when the answer is a smaller line than you expected.',
+  },
+  {
+    q: 'What temperature range do you supply?',
+    a: 'Standard configurations go up to 950 °C. Higher working temperatures change the refractory, the atmosphere sealing and the cooling requirements, so we scope those separately rather than quoting them as a variation.',
+  },
+  {
+    q: 'How is temperature uniformity specified?',
+    a: 'By class, measured across the work zone rather than at a single setpoint. We document the survey at commissioning and issue the record with the machine. If a process needs tighter control than our standard class, say so early — it affects heating element placement and zone count.',
+  },
+  {
+    q: 'Do you supply the quench section?',
+    a: 'Yes. Oil, water and polymer quench, gas quench and air cooling are all available, either integrated into the line or as a separate section matched to your handling and downstream process.',
+  },
+  {
+    q: 'What about installation in our country?',
+    a: 'We supervise installation and commissioning on site. For distant markets we run supervised remote commissioning with video support, and we train your operators before handover.',
+  },
+  {
+    q: 'How long does a line take?',
+    a: 'Lead time depends on working width, atmosphere complexity and current order book. Every quotation states a delivery window, and we treat that window as a commitment rather than an estimate.',
+  },
+];
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jins.mokc.top/' },
+    { '@type': 'ListItem', position: 2, name: 'Products', item: 'https://www.jins.mokc.top/products' },
+  ],
+};
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Continuous Industrial Heat Treatment Furnaces',
+  category: 'Industrial furnaces',
+  manufacturer: { '@type': 'Organization', name: 'HCS' },
+  areaServed: 'Worldwide',
+  description:
+    'Continuous heat treatment furnaces: mesh belt, roller hearth, car bottom and pusher platforms, with documented temperature uniformity, quench integration and full commissioning support.',
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<BaseLayout
+  title="Products"
+  description="Continuous heat treatment furnaces from HCS — mesh belt, roller hearth, car bottom and pusher platforms with documented temperature uniformity and full commissioning support."
+  structuredData={[breadcrumb, productSchema, faqSchema]}
+>
+  <section class="page-head">
+    <div class="container">
+      <SectionHeading
+        as="h1"
+        eyebrow="Products"
+        title="Four platforms, sized to your process"
+        lead="No catch-all furnace. Every line is specified against your part geometry, throughput target, atmosphere and downstream handling — and we say so when a smaller line is the better answer."
+      />
+    </div>
+  </section>
+
+  <Services />
+
+  <section class="section section--soft" id="faq">
+    <div class="container container--narrow">
+      <SectionHeading eyebrow="FAQ" title="Before you enquire" />
+
+      <div class="faq">
+        {
+          FAQ.map((f) => (
+            <details class="faq__item">
+              <summary class="faq__q">
+                {f.q}
+                <span class="faq__icon" aria-hidden="true" />
+              </summary>
+              <p class="faq__a">{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+
+      <div class="faq__cta">
+        <p>Still unsure which platform fits? Send us the part and we will tell you.</p>
+        <Button href="/contact">Send an enquiry</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-block: clamp(3rem, 7vw, var(--sp-8)) var(--sp-7);
+    background: var(--c-bg-soft);
+    border-bottom: 1px solid var(--c-line-soft);
+  }
+
+  .page-head :global(.sec-head) {
+    margin-bottom: 0;
+  }
+
+  .faq {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    padding-block: var(--sp-5);
+    font-size: var(--fs-lg);
+    font-weight: 650;
+    color: var(--c-ink);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .faq__icon::before,
+  .faq__icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: var(--c-accent);
+    border-radius: var(--radius-full);
+    transition: transform var(--dur) var(--ease);
+  }
+
+  .faq__icon::after {
+    transform: rotate(90deg);
+  }
+
+  .faq__item[open] .faq__icon::after {
+    transform: rotate(0deg);
+  }
+
+  .faq__a {
+    padding-bottom: var(--sp-5);
+    font-size: var(--fs-md);
+    line-height: 1.85;
+    color: var(--c-muted);
+    max-width: 68ch;
+  }
+
+  .faq__cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--sp-4);
+    margin-top: var(--sp-7);
+    padding: var(--sp-5);
+    background: var(--c-bg);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+  }
+
+  .faq__cta p {
+    color: var(--c-ink-2);
+    font-weight: 600;
+  }
+</style>

@@ -1,12 +1,12 @@
 {
-  "name": "黎金树 · 数字营销师",
-  "short_name": "黎金树",
-  "description": "实用主义出海营销与品牌增长方案",
+  "name": "HCS — Continuous Industrial Heat Treatment Furnaces",
+  "short_name": "HCS",
+  "description": "Continuous heat treatment furnaces — mesh belt, roller hearth, car bottom and pusher platforms.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0b",
   "theme_color": "#0a0a0b",
-  "lang": "zh-CN",
+  "lang": "en",
   "icons": [
     {
       "src": "/brand/favicon-32.webp",

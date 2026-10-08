@@ -6,9 +6,9 @@ import { SERVICES, PROCESS } from '../../data/profile';
 <section class="section section--soft" id="services">
   <div class="container">
     <SectionHeading
-      eyebrow="服务"
-      title="能落地的数字营销方案"
-      lead="每项服务都写清楚交付物。做不到的不写，写了就一定交得出来。"
+      eyebrow="What we do"
+      title="From process definition to lifetime support"
+      lead="Each stage produces something you can check. Anything we cannot deliver on paper, we do not offer."
     />
 
     <div class="svc__grid">
@@ -20,7 +20,7 @@ import { SERVICES, PROCESS } from '../../data/profile';
             <p class="svc__summary">{s.summary}</p>
             <p class="svc__body">{s.body}</p>
             <div class="svc__deliver">
-              <p class="svc__deliver-label mono">交付物</p>
+              <p class="svc__deliver-label mono">Deliverables</p>
               <ul>
                 {s.deliverables.map((d) => (
                   <li>{d}</li>
@@ -37,9 +37,9 @@ import { SERVICES, PROCESS } from '../../data/profile';
 <section class="section" id="process">
   <div class="container">
     <SectionHeading
-      eyebrow="合作流程"
-      title="四步，从诊断到复盘"
-      lead="不搞黑盒交付。每一步都有明确的产出和判断依据。"
+      eyebrow="Delivery process"
+      title="Four stages, clear outputs"
+      lead="No black-box delivery. Each stage ends with an output you can review before the next one begins."
     />
 
     <ol class="proc">

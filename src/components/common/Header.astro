@@ -8,12 +8,12 @@ const isActive = (href: string) =>
 
 <header class="site-header" id="site-header">
   <div class="container site-header__inner">
-    <a class="brand" href="/" aria-label="返回首页">
+    <a class="brand" href="/" aria-label="Back to home">
       <img
         class="brand__logo"
         src="/brand/logo-black.webp"
         width="461"
-        height="417"
+        height="461"
         alt=""
         aria-hidden="true"
         decoding="async"
@@ -24,7 +24,7 @@ const isActive = (href: string) =>
       </span>
     </a>
 
-    <nav class="nav" aria-label="主导航">
+    <nav class="nav" aria-label="Main navigation">
       <ul class="nav__list" id="nav-list">
         {
           NAV.map((item) => (
@@ -43,11 +43,11 @@ const isActive = (href: string) =>
     </nav>
 
     <div class="site-header__actions">
-      <a class="btn btn--primary btn--sm" href="/contact">聊聊合作</a>
+      <a class="btn btn--primary btn--sm" href="/contact">Send an enquiry</a>
       <button
         class="nav-toggle"
         type="button"
-        aria-label="打开菜单"
+        aria-label="Open menu"
         aria-expanded="false"
         aria-controls="nav-list"
         id="nav-toggle"
@@ -269,7 +269,7 @@ const isActive = (href: string) =>
   toggle?.addEventListener('click', () => {
     const open = toggle.getAttribute('aria-expanded') === 'true';
     toggle.setAttribute('aria-expanded', String(!open));
-    toggle.setAttribute('aria-label', open ? '打开菜单' : '关闭菜单');
+    toggle.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
     nav?.classList.toggle('is-open', !open);
   });
 

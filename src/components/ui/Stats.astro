@@ -1,6 +1,13 @@
 ---
 interface Props {
-  items: readonly { value: number; suffix?: string; label: string; hint?: string; decimals?: number }[];
+  /** 数值可为数字或字符串（如 '±5'），字符串会原样显示 */
+  items: readonly {
+    value: number | string;
+    suffix?: string;
+    label: string;
+    hint?: string;
+    decimals?: number;
+  }[];
 }
 const { items } = Astro.props;
 ---
@@ -12,9 +19,11 @@ const { items } = Astro.props;
         <dt class="visually-hidden">{s.label}</dt>
         <dd>
           <span class="stats__value">
-            {s.decimals
-              ? s.value.toFixed(s.decimals)
-              : s.value.toLocaleString('en-US')}
+            {typeof s.value === 'number'
+              ? s.decimals
+                ? s.value.toFixed(s.decimals)
+                : s.value.toLocaleString('en-US')
+              : s.value}
             {s.suffix && <span class="stats__suffix">{s.suffix}</span>}
           </span>
           <span class="stats__label">{s.label}</span>

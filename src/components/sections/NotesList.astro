@@ -8,7 +8,7 @@ interface Props {
 const { notes } = Astro.props;
 
 const fmt = (d: Date) =>
-  `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
+  `${d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}`;
 ---
 
 <div class="notes">
@@ -30,7 +30,7 @@ const fmt = (d: Date) =>
         </h3>
         <p class="note__desc">{n.data.description}</p>
         <span class="note__more" aria-hidden="true">
-          阅读全文 →
+          Read more →
         </span>
       </article>
     ))

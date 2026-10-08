@@ -23,23 +23,21 @@ const siteUrl = SITE.url;
 const defaultData = [
   {
     '@context': 'https://schema.org',
-    '@type': 'Person',
-    '@id': `${siteUrl}/#person`,
-    name: '黎金树',
-    alternateName: 'JINS',
+    '@type': 'Organization',
+    '@id': `${siteUrl}/#organization`,
+    name: SITE.name,
     url: siteUrl,
     email: `mailto:${SITE.email}`,
-    jobTitle: '数字营销师',
     description: SITE.description,
     image: `${siteUrl}/brand/og-default.webp`,
     logo: `${siteUrl}/brand/og-default.webp`,
     knowsAbout: [
-      'B2B 海外获客',
-      '独立站运营',
-      'SEO',
-      '社媒营销',
-      '广告投放',
-      'AI 提效',
+      'Continuous heat treatment furnaces',
+      'Mesh belt furnaces',
+      'Roller hearth furnaces',
+      'Car bottom furnaces',
+      'Pusher furnaces',
+      'Industrial heat treatment',
     ],
   },
   {
@@ -49,9 +47,8 @@ const defaultData = [
     url: siteUrl,
     name: SITE.title,
     description: SITE.description,
-    inLanguage: SITE.locale,
-    publisher: { '@id': `${siteUrl}/#person` },
-    author: { '@id': `${siteUrl}/#person` },
+    inLanguage: SITE.lang,
+    publisher: { '@id': `${siteUrl}/#organization` },
   },
 ];
 ---
@@ -62,7 +59,7 @@ const defaultData = [
     <Seo {...seoProps} structuredData={structuredData ?? defaultData} />
   </head>
   <body>
-    <a class="skip-link" href="#main">跳到主要内容</a>
+    <a class="skip-link" href="#main">Skip to main content</a>
     <Header />
     <main id="main">
       <slot />
