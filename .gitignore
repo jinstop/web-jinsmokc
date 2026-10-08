@@ -49,3 +49,6 @@ Thumbs.db
 
 # astro
 .astro/
+
+# 本地 AI 工作流文档，不入库（避免公开仓库暴露项目配置）
+SKILL.md
