@@ -82,7 +82,7 @@ async function resolveCommit(token, version) {
 }
 
 /** 回填 Git 章节里的占位符 */
-function fillGitSection(body, version, shortSha) {
+function fillGitSection(body, shortSha) {
   let out = body.replace(
     /- Commit：(待推送后补记|待记录)/,
     `- Commit：\`${shortSha ?? '—'}\``,
@@ -116,7 +116,7 @@ async function main() {
 
   // dry-run 不需要令牌：能解析提交号就带上，不能就跳过
   const shortSha = token ? await resolveCommit(token, version) : null;
-  const body = fillGitSection(raw, version, shortSha);
+  const body = fillGitSection(raw, shortSha);
 
   if (dryRun) {
     console.log(`[dry-run] tag   : ${version}`);
