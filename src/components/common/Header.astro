@@ -9,7 +9,15 @@ const isActive = (href: string) =>
 <header class="site-header" id="site-header">
   <div class="container site-header__inner">
     <a class="brand" href="/" aria-label="返回首页">
-      <span class="brand__mark" aria-hidden="true">黎</span>
+      <img
+        class="brand__logo"
+        src="/brand/logo-black.webp"
+        width="461"
+        height="417"
+        alt=""
+        aria-hidden="true"
+        decoding="async"
+      />
       <span class="brand__text">
         <strong>{SITE.name}</strong>
         <small>{SITE.tagline}</small>
@@ -85,16 +93,11 @@ const isActive = (href: string) =>
     flex-shrink: 0;
   }
 
-  .brand__mark {
-    display: grid;
-    place-items: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: var(--radius-sm);
-    background: var(--c-ink);
-    color: #fff;
-    font-size: var(--fs-md);
-    font-weight: 700;
+  .brand__logo {
+    height: 2rem;
+    width: auto;
+    flex-shrink: 0;
+    display: block;
   }
 
   .brand__text {

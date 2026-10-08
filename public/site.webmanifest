@@ -6,5 +6,19 @@
   "display": "standalone",
   "background_color": "#0a0a0b",
   "theme_color": "#0a0a0b",
-  "lang": "zh-CN"
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "/brand/favicon-32.webp",
+      "sizes": "88x88",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/og-default.webp",
+      "sizes": "400x400",
+      "type": "image/webp",
+      "purpose": "maskable"
+    }
+  ]
 }

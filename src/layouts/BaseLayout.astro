@@ -31,6 +31,8 @@ const defaultData = [
     email: `mailto:${SITE.email}`,
     jobTitle: '数字营销师',
     description: SITE.description,
+    image: `${siteUrl}/brand/og-default.webp`,
+    logo: `${siteUrl}/brand/og-default.webp`,
     knowsAbout: [
       'B2B 海外获客',
       '独立站运营',
@@ -48,6 +50,7 @@ const defaultData = [
     name: SITE.title,
     description: SITE.description,
     inLanguage: SITE.locale,
+    publisher: { '@id': `${siteUrl}/#person` },
     author: { '@id': `${siteUrl}/#person` },
   },
 ];

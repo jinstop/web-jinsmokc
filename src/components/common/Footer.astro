@@ -8,6 +8,16 @@ const year = new Date().getFullYear();
   <div class="container">
     <div class="site-footer__top">
       <div class="site-footer__brand">
+        <img
+          class="site-footer__logo"
+          src="/brand/logo-white.webp"
+          width="461"
+          height="417"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+        />
         <p class="site-footer__name">黎金树</p>
         <p class="site-footer__desc">
           实用主义的出海营销与品牌增长方案。<br />
@@ -66,6 +76,13 @@ const year = new Date().getFullYear();
     gap: var(--sp-7);
     padding-bottom: var(--sp-7);
     border-bottom: 1px solid #232328;
+  }
+
+  .site-footer__logo {
+    display: block;
+    height: 2.75rem;
+    width: auto;
+    margin-bottom: var(--sp-4);
   }
 
   .site-footer__name {
